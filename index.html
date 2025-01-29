@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coursera Homepage</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous" />
+    <style>
+        body{
+            background-color: #f8f9fa;
+        }
+      .cardx {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+      }
+      .threecards {
+        display: flex;
+        gap: 0.3rem;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: start;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Page Sections -->
+    <header id="main-header"></header>
+    <section id="main-hero"></section>
+    <section id="main-search"></section>
+    <section id="main-popular"></section>
+    <section id="main-courseCategory"></section>
+    <section id="main-headerCard"></section>
+    <div class="cardx search-main-container">
+      <div class="threecards">
+        <!-- First, Inject the Explore Courses Card -->
+        <div class=" " id="explore-courses-card-contain"></div>
+
+        <!-- Then, Inject 3 Course Cards -->
+        <div class=" threecards" id="course-cards-container">
+          <!-- Cards will be dynamically injected here -->
+        </div>
+      </div>
+    </div>
+    <div class="cardx search-main-container">
+      <div class="threecards">
+        <!-- First, Inject the Explore Courses Card -->
+        <div class=" " id="explore-courses-card-contain2"></div>
+
+        <!-- Then, Inject 3 Course Cards -->
+        <div class=" threecards" id="course-cards-container2">
+          <!-- Cards will be dynamically injected here -->
+        </div>
+      </div>
+    </div>
+    <div class="cardx search-main-container">
+      <div class="threecards">
+          <!-- First, Inject the Explore Courses Card -->
+          <div class=" " id="explore-courses-card-contain3"></div>
+          
+          <!-- Then, Inject 3 Course Cards -->
+          <div class=" threecards" id="course-cards-container3">
+              <!-- Cards will be dynamically injected here -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Placeholder for 4 Explore Courses Cards -->
+    <div class="search-main-container">
+        <section id="explore-courses-cards-container" class="container mt-5 cardx ">
+            <!-- Cards will be injected here -->
+        </section>
+    </div>
+    <!-- <section id="main-displaycard"></section> -->
+    <section id="main-ad"></section>
+    <section id="main-testimonial"></section>
+    <footer id="main-footer"></footer>
+    
+
+    <!-- JavaScript to Load Components -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const components = [
+          { id: "main-header", file: "navbar.html" },
+          { id: "main-hero", file: "hero.html" },
+          { id: "main-search", file: "search.html" },
+          { id: "main-popular", file: "popular.html" },
+          // { id: "main-courseCategory", file: "courseCategory.html" },
+          // { id: "main-headerCard", file: "headerCard.html" },
+        //   { id: "main-displaycard", file: "displaycard.html" },
+          { id: "main-ad", file: "ad.html" },
+          { id: "main-testimonial", file: "testimonial.html" },
+          { id: "main-footer", file: "footer.html" },
+        ];
+
+        components.forEach(({ id, file }) => {
+          fetch(file)
+            .then((response) => response.text())
+            .then((html) => {
+              document.getElementById(id).innerHTML = html;
+
+              // Reinitialize Bootstrap JS for the navbar if necessary
+              if (file === "navbar.html") {
+                const navbarToggler = document.querySelector(".navbar-toggler");
+                const navbarCollapse =
+                  document.querySelector(".navbar-collapse");
+
+                if (navbarToggler && navbarCollapse) {
+                  navbarToggler.addEventListener("click", () => {
+                    navbarCollapse.classList.toggle("show");
+                  });
+                }
+              }
+            })
+            .catch((error) => console.error(`Error loading ${file}:`, error));
+        });
+
+        // Reusable Card Fetch Logic
+        fetch("cardComponent.html")
+          .then((response) => response.text())
+          .then((html) => {
+            const cardContainer = document.getElementById(
+              "explore-courses-cards-container"
+            );
+
+            // Data for each card
+            const cardsData = [
+              {
+                title: "Explore Degree Courses",
+                description:
+                  "Explore our newest programmes, focused on delivering in-demand skills.",
+                link: "#",
+                backgroundColor: "#1a237e",
+              },
+              {
+                title: "Explore Business Courses",
+                description:
+                  "Develop your business acumen with industry-specific courses.",
+                link: "#",
+                backgroundColor: "#0d47a1",
+              },
+              {
+                title: "Explore Technology Courses",
+                description:
+                  "Boost your tech skills with our latest coding and development programs.",
+                link: "#",
+                backgroundColor: "#388e3c",
+              },
+              {
+                title: "Explore Marketing Courses",
+                description:
+                  "Learn modern marketing strategies for business growth.",
+                link: "#",
+                backgroundColor: "#f57c00",
+              },
+            ];
+
+            // Loop through data and inject each card with dynamic content
+            cardsData.forEach((cardData) => {
+              let cardHtml = html;
+              // Replace placeholders with dynamic content
+              cardHtml = cardHtml
+                .replace("{{title}}", cardData.title)
+                .replace("{{description}}", cardData.description)
+                .replace("{{link}}", cardData.link);
+
+              // Find the card element and set dynamic background color
+              const cardElement = document.createElement("div");
+              cardElement.innerHTML = cardHtml;
+              cardElement.querySelector(".explore-card").style.backgroundColor =
+                cardData.backgroundColor;
+
+              // Append the card to the container
+              cardContainer.appendChild(cardElement);
+            });
+          })
+          .catch((error) =>
+            console.error(`Error loading card component:`, error)
+          );
+        fetch("cardComponent.html")
+          .then((response) => response.text())
+          .then((html) => {
+            const cardContainer = document.getElementById(
+              "explore-courses-card-contain"
+            );
+         
+
+            // Data for each card
+            const cardsData = [
+              {
+                title: "Explore Degree Courses",
+                description:
+                  "Explore our newest programmes, focused on delivering in-demand skills.",
+                link: "#",
+                backgroundColor: "#1a237e",
+              },
+            ];
+
+            // Loop through data and inject each card with dynamic content
+            cardsData.forEach((cardData) => {
+              let cardHtml = html;
+              // Replace placeholders with dynamic content
+              cardHtml = cardHtml
+                .replace("{{title}}", cardData.title)
+                .replace("{{description}}", cardData.description)
+                .replace("{{link}}", cardData.link);
+
+              // Find the card element and set dynamic background color
+              const cardElement = document.createElement("div");
+            //   cardElement.classList.add( "mb-4"); 
+              cardElement.innerHTML = cardHtml;
+              cardElement.querySelector(".explore-card").style.backgroundColor =
+                cardData.backgroundColor;
+
+              // Append the card to the container
+              cardContainer.appendChild(cardElement);
+            
+            });
+          })
+          .catch((error) =>
+            console.error(`Error loading card component:`, error)
+          );
+        fetch("cardComponent.html")
+          .then((response) => response.text())
+          .then((html) => {
+          
+            const cardContainer2 = document.getElementById(
+              "explore-courses-card-contain2"
+            );
+         
+
+            // Data for each card
+            const cardsData = [
+              {
+                title: "Explore Degree Courses",
+                description:
+                  "Explore our newest programmes, focused on delivering in-demand skills.",
+                link: "#",
+                backgroundColor: "#1a237e",
+              },
+            ];
+
+            // Loop through data and inject each card with dynamic content
+            cardsData.forEach((cardData) => {
+              let cardHtml = html;
+              // Replace placeholders with dynamic content
+              cardHtml = cardHtml
+                .replace("{{title}}", cardData.title)
+                .replace("{{description}}", cardData.description)
+                .replace("{{link}}", cardData.link);
+
+              // Find the card element and set dynamic background color
+              const cardElement = document.createElement("div");
+            //   cardElement.classList.add( "mb-4"); 
+              cardElement.innerHTML = cardHtml;
+              cardElement.querySelector(".explore-card").style.backgroundColor =
+                cardData.backgroundColor;
+
+              // Append the card to the container
+              
+              cardContainer2.appendChild(cardElement);
+            });
+          })
+          .catch((error) =>
+            console.error(`Error loading card component:`, error)
+          );
+        fetch("cardComponent.html")
+          .then((response) => response.text())
+          .then((html) => {
+       
+            const cardContainer3 = document.getElementById(
+              "explore-courses-card-contain3"
+            );
+
+            // Data for each card
+            const cardsData = [
+              {
+                title: "Explore Degree Courses",
+                description:
+                  "Explore our newest programmes, focused on delivering in-demand skills.",
+                link: "#",
+                backgroundColor: "#1a237e",
+              },
+            ];
+
+            // Loop through data and inject each card with dynamic content
+            cardsData.forEach((cardData) => {
+              let cardHtml = html;
+              // Replace placeholders with dynamic content
+              cardHtml = cardHtml
+                .replace("{{title}}", cardData.title)
+                .replace("{{description}}", cardData.description)
+                .replace("{{link}}", cardData.link);
+
+              // Find the card element and set dynamic background color
+              const cardElement = document.createElement("div");
+            //   cardElement.classList.add( "mb-4"); 
+              cardElement.innerHTML = cardHtml;
+              cardElement.querySelector(".explore-card").style.backgroundColor =
+                cardData.backgroundColor;
+
+              // Append the card to the container
+          cardContainer3.appendChild(cardElement);
+            });
+          })
+          .catch((error) =>
+            console.error(`Error loading card component:`, error)
+          );
+
+          fetch("displaycard.html")
+  .then((response) => response.text())
+  .then((html) => {
+    const cardContainer3 = document.getElementById("course-cards-container3");
+
+    const courses = [
+      {
+        title: "Executive MBA in Media & Entertainment",
+        description:
+          "The programme's objective is to equip you with a deeper understanding of entertainment management and media...",
+        price: "£120",
+        oldPrice: "£216",
+        duration: "Online | 12 Months",
+        imageUrl:
+          "assets/task wopic.png",
+        link: "#",
+        backgroundColor: "#f9f9f9",
+      },
+      {
+        title: "Master of Science in Computer Science",
+        description:
+          "Gain expertise in computer programming and information systems management with a comprehensive curriculum.",
+        price: "£180",
+        oldPrice: "£250",
+        duration: "Online | 18 Months",
+        imageUrl:
+          "assets/task wopic.png",
+        link: "#",
+        backgroundColor: "#eef4ff",
+      },
+      {
+        title: "Master of Marketing Strategies",
+        description:
+          "Learn modern marketing strategies for business growth in a digital world.",
+        price: "£150",
+        oldPrice: "£230",
+        duration: "Online | 9 Months",
+        imageUrl:
+          "assets/task wopic.png",
+        link: "#",
+        backgroundColor: "#fff3e0",
+      },
+    ];
+
+    courses.forEach((cardData) => {
+      let cardHtml = html
+        .replace("{{title}}", cardData.title)
+        .replace("{{description}}", cardData.description)
+        .replace("{{price}}", cardData.price)
+        .replace("{{oldPrice}}", cardData.oldPrice)
+        .replace("{{duration}}", cardData.duration)
+        .replace("{{link}}", cardData.link)
+        .replace("{{imageUrl}}", cardData.imageUrl); // Ensure image is dynamic
+
+      const cardElement = document.createElement("div");
+      cardElement.classList.add( "mb-5"); 
+      cardElement.innerHTML = cardHtml;
+
+      // Apply dynamic background color
+      const courseCard = cardElement.querySelector(".course-card");
+      if (courseCard) {
+        courseCard.style.backgroundColor = cardData.backgroundColor;
+      }
+
+      cardContainer3.appendChild(cardElement);
+    });
+  })
+  .catch((error) => console.error(`Error loading card component:`, error));
+          fetch("displaycard.html")
+  .then((response) => response.text())
+  .then((html) => {
+    const cardContainer2 = document.getElementById("course-cards-container2");
+
+    const courses = [
+      {
+        title: "Executive MBA in Media & Entertainment",
+        description:
+          "The programme's objective is to equip you with a deeper understanding of entertainment management and media...",
+        price: "£120",
+        oldPrice: "£216",
+        duration: "Online | 12 Months",
+        imageUrl:
+          "assets/task wopic.png",
+        link: "#",
+        backgroundColor: "#f9f9f9",
+      },
+      {
+        title: "Master of Science in Computer Science",
+        description:
+          "Gain expertise in computer programming and information systems management with a comprehensive curriculum.",
+        price: "£180",
+        oldPrice: "£250",
+        duration: "Online | 18 Months",
+        imageUrl:
+          "assets/task wopic.png",
+        link: "#",
+        backgroundColor: "#eef4ff",
+      },
+      {
+        title: "Master of Marketing Strategies",
+        description:
+          "Learn modern marketing strategies for business growth in a digital world.",
+        price: "£150",
+        oldPrice: "£230",
+        duration: "Online | 9 Months",
+        imageUrl:
+          "assets/task wopic.png",
+        link: "#",
+        backgroundColor: "#fff3e0",
+      },
+    ];
+
+    courses.forEach((cardData) => {
+      let cardHtml = html
+        .replace("{{title}}", cardData.title)
+        .replace("{{description}}", cardData.description)
+        .replace("{{price}}", cardData.price)
+        .replace("{{oldPrice}}", cardData.oldPrice)
+        .replace("{{duration}}", cardData.duration)
+        .replace("{{link}}", cardData.link)
+        .replace("{{imageUrl}}", cardData.imageUrl); // Ensure image is dynamic
+
+      const cardElement = document.createElement("div");
+      cardElement.classList.add( "mb-5"); 
+      cardElement.innerHTML = cardHtml;
+
+      // Apply dynamic background color
+      const courseCard = cardElement.querySelector(".course-card");
+      if (courseCard) {
+        courseCard.style.backgroundColor = cardData.backgroundColor;
+      }
+
+      cardContainer2.appendChild(cardElement);
+    });
+  })
+  .catch((error) => console.error(`Error loading card component:`, error));
+          fetch("displaycard.html")
+  .then((response) => response.text())
+  .then((html) => {
+    const cardContainer = document.getElementById("course-cards-container");
+
+    const courses = [
+      {
+        title: "Executive MBA in Media & Entertainment",
+        description:
+          "The programme's objective is to equip you with a deeper understanding of entertainment management and media...",
+        price: "£120",
+        oldPrice: "£216",
+        duration: "Online | 12 Months",
+        imageUrl:
+          "assets/task wopic.png",
+        link: "#",
+        backgroundColor: "#f9f9f9",
+      },
+      {
+        title: "Master of Science in Computer Science",
+        description:
+          "Gain expertise in computer programming and information systems management with a comprehensive curriculum.",
+        price: "£180",
+        oldPrice: "£250",
+        duration: "Online | 18 Months",
+        imageUrl:
+          "assets/task wopic.png",
+        link: "#",
+        backgroundColor: "#eef4ff",
+      },
+      {
+        title: "Master of Marketing Strategies",
+        description:
+          "Learn modern marketing strategies for business growth in a digital world.",
+        price: "£150",
+        oldPrice: "£230",
+        duration: "Online | 9 Months",
+        imageUrl:
+          "assets/task wopic.png",
+        link: "#",
+        backgroundColor: "#fff3e0",
+      },
+    ];
+
+    courses.forEach((cardData) => {
+      let cardHtml = html
+        .replace("{{title}}", cardData.title)
+        .replace("{{description}}", cardData.description)
+        .replace("{{price}}", cardData.price)
+        .replace("{{oldPrice}}", cardData.oldPrice)
+        .replace("{{duration}}", cardData.duration)
+        .replace("{{link}}", cardData.link)
+        .replace("{{imageUrl}}", cardData.imageUrl); // Ensure image is dynamic
+
+      const cardElement = document.createElement("div");
+      cardElement.classList.add( "mb-5"); 
+      cardElement.innerHTML = cardHtml;
+
+      // Apply dynamic background color
+      const courseCard = cardElement.querySelector(".course-card");
+      if (courseCard) {
+        courseCard.style.backgroundColor = cardData.backgroundColor;
+      }
+
+      cardContainer.appendChild(cardElement);
+    });
+  })
+  .catch((error) => console.error(`Error loading card component:`, error));
+      });
+    </script>
+
+    <!-- Bootstrap Bundle (JS + Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

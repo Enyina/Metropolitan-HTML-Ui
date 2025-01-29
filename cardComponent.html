@@ -1,0 +1,97 @@
+<!-- cardComponent.html -->
+<div class="explore-card" id="explore-card">
+
+    <div class="content">
+        <h2 class="explore-title">{{title}}</h2>
+        <p class="explore-description">{{description}}</p>
+        <div class="explore-button-container">
+            <a href="{{link}}" class="explore-button">Explore</a>
+        </div>
+    </div>
+</div>
+
+
+<!-- Styles for the card -->
+<style>
+    .explore-card {
+        background-color: #1a237e;
+        color: white;
+        padding: 40px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        min-height: 350px;
+        position: relative;
+        overflow: hidden;
+        height: 400px;
+        width: 250px;
+        align-items: flex-start; /* Align items to the left */
+        justify-content: space-between; /* Ensure content fills space and pushes button to the bottom */
+    }
+
+    .explore-title {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: left; /* Explicitly align text left */
+        /* height: 45%; */
+    }
+
+    .explore-description {
+        margin-bottom: 30px;
+        font-size: 1rem;
+        text-align: left; /* Explicitly align text left */
+        flex-grow: 1; /* Allow description to grow and push the button down */
+        max-height: 85px;
+        overflow: hidden;
+        height: 90px;
+    }
+
+    .explore-button-container { 
+        width: 100%; /* Occupy full width */
+        display: flex;
+        justify-content: center; /* Center the button horizontally */
+        margin-top: auto; /* Ensure the button stays at the bottom */
+        height: 20%;
+    }
+
+    .explore-button {
+        background-color: white;
+        color: #1a237e;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .explore-button:hover {
+        background-color: #f0f0f0;
+        color: #151c6a;
+    }
+
+    .graphic {
+        position: absolute;
+        bottom: -50px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 400px;
+        opacity: 0.2;
+        z-index: 0;
+    }
+
+    .content {
+        z-index: 1;
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        
+    }
+</style>
+

@@ -1,0 +1,78 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Categories</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .explore-card {
+            background-color: #1a237e;
+            color: white;
+            padding: 40px;
+            border-radius: 10px;
+            min-height: 300px;
+            position: relative;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-5">
+        <div class="row" id="explore-cards-container"></div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            console.log("Loading courseCategory.html...");
+
+            const courseData = [
+                { title: "Explore Degree Courses", description: "Explore our newest programs focused on in-demand skills.", buttonText: "Explore" },
+                { title: "Explore Business Courses", description: "Enhance your business skills with specialized courses.", buttonText: "Discover" },
+                { title: "Explore Tech Courses", description: "Learn the latest tech trends and programming languages.", buttonText: "Start Learning" },
+                { title: "Explore Health Courses", description: "Advance your career in healthcare and wellness.", buttonText: "View Courses" }
+            ];
+
+            const container = document.getElementById("explore-cards-container");
+
+            try {
+                const response = await fetch("exploreCard.html");
+                if (!response.ok) throw new Error("Failed to load exploreCard.html");
+
+                const cardHTML = await response.text();
+                console.log("Fetched exploreCard.html:", cardHTML);
+
+                courseData.forEach((course, index) => {
+                    let tempDiv = document.createElement("div");
+                    tempDiv.innerHTML = cardHTML.trim();
+                    
+                    let cardElement = tempDiv.firstElementChild;
+
+                    if (!cardElement) {
+                        console.error(`Error: Card element is null for index ${index}`);
+                        return;
+                    }
+
+                    // Set content dynamically
+                    cardElement.querySelector(".explore-title").innerHTML = course.title;
+                    cardElement.querySelector(".explore-description").innerHTML = course.description;
+                    cardElement.querySelector(".explore-button").innerText = course.buttonText;
+
+                    container.appendChild(cardElement);
+                    console.log(`Card for "${course.title}" added to container.`);
+                });
+
+                console.log("Successfully loaded cards into the page.");
+            } catch (error) {
+                console.error("Error loading explore card component:", error);
+            }
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> -->

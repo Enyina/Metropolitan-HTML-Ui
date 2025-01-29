@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimonial Section</title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+    <style>
+        .testimonial-section {
+            background-color: #fef9ef; /* Off-white background */
+            padding: 80px 0; 
+        }
+
+        .testimonial-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .testimonial-text {
+            flex: 1; /* Allow text to take up available space */
+            padding-right: 40px;
+        }
+
+        .testimonial-title {
+            color: #a31f44; /* Dark red title */
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .testimonial-divider {
+            width: 50px;
+            height: 3px;
+            background-color: #a31f44;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-description {
+            color: #333;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 40px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+        .testimonial-image img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .testimonial-info {
+            flex: 1;
+        }
+
+        .testimonial-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .testimonial-role {
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+        .testimonial-stars{
+            color: #ffc107;
+            margin-bottom: 1rem;
+            font-size: 0.8rem;
+        }
+        .testimonial-dots{
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        .testimonial-dot{
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ccc;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        .testimonial-dot.active{
+            background-color: #a31f44;
+        }
+        .container{
+            max-width: 1200px;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="testimonial-section">
+        <div class="container">
+            <div class="testimonial-content">
+                <div class="testimonial-text">
+                    <h2 class="testimonial-title">How learners like you<br>are achieving their<br>goals</h2>
+                    <div class="testimonial-divider"></div>
+                    <p class="testimonial-description">Participants in our courses don't just learn new skills, they enjoy the experience too.</p>
+                </div>
+                <div class="testimonial-image">
+                    <img src="https://i.ibb.co/6y7576P/imageonline-co-transparentimage.png" alt="Andrew Samson">
+                </div>
+                <div class="testimonial-info">
+                    <p class="testimonial-name">Andrew Samson</p>
+                    <p class="testimonial-role">Communication Manager, Pepsi<br>Executive Education</p>
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate reiciendis repellat ullam voluptas accusantium maxime vel cupiditate, inventore recusandae soluta temporibus. Assumenda molestias sapiente aliquid voluptas id, ipsa, quia perspiciatis eaque laborum quis tempore modi deleniti ullam voluptatum numquam veniam tenetur fuga dolore quam molestiae et. Exercitationem architecto in dolorum!</p>
+                </div>
+            </div>
+            <div class="testimonial-dots">
+                <div class="testimonial-dot active"></div>
+                <div class="testimonial-dot"></div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
